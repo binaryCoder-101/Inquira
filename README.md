@@ -31,7 +31,7 @@ Inquira is an AI-powered question-answering application built with LangChain, su
 
 Before getting started, ensure you have the following installed:
 
-- Python 3.10 or higher (or the version specified in `pyproject.toml`)
+- Python 3.12 or higher (or the version specified in `pyproject.toml`)
 - [uv](https://docs.astral.sh/uv/) — Python package and project manager
 - API keys for OpenAI and/or Anthropic
 
