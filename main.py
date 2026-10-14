@@ -3,6 +3,7 @@ from langchain_openai import ChatOpenAI
 from pydantic import BaseModel, Field
 from typing import List, Optional
 from dotenv import load_dotenv
+from langsmith import traceable, Client
 import os
 
 load_dotenv()
@@ -64,6 +65,7 @@ class SmartQABot:
         
         self.chain = self.prompt | self.model
 
+    @traceable(name="ask_question", run_type="chain")
     def ask(self, question: str) -> QAResponse:
         try:
             response = self.chain.invoke({"question": question})
