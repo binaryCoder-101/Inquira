@@ -79,7 +79,21 @@ class SmartQABot:
                 follow_up_questions=["Could you please try again later?"],
                 sources_needed=False
             )
-
+    
+    @traceable(name="ask_batch", run_type="chain")
+    def ask_batch(self, questions: list[str]) -> list[QAResponse]:
+        try:
+            responses = self.chain.batch([{"question": question} for question in questions])
+            return responses
+        except Exception as e:
+            # return a graceful error response
+            return [QAResponse(
+                answer="I am sorry, I am not able to answer your question at the moment.",
+                confidence="low",
+                reasoning=f"Error: {str(e)}",
+                follow_up_questions=["Could you please try again later?"],
+                sources_needed=False
+            ) for _ in questions]
 
 def main():
     print("Hello from inquira!")
