@@ -6,13 +6,16 @@ Inquira is an AI-powered question-answering application built with LangChain, su
 
 ## Features
 
+- **Rich Terminal UI** — Stunning TUI with styled panels, colored
+  tables, animated spinners, and syntax-highlighted JSON output powered
+  by [Rich](https://github.com/Textualize/rich).
 - **Multi-Provider LLM Support** — Integrates OpenAI and Anthropic
   models through their respective APIs.
 - **Natural Language Question Answering** — Processes user queries
   and generates AI-powered responses.
 - **Structured Outputs** — Generates consistent, schema-validated
   responses using Pydantic.
-- **Confidence Scoring** — Provides LLM-generated confidence scores
+- **Confidence Scoring** — Color-coded confidence badges (green/yellow/red)
   alongside answers.
 - **Error Handling** — Handles API and model invocation failures.
 - **LangSmith Observability** — Enables tracing and debugging
@@ -23,6 +26,7 @@ Inquira is an AI-powered question-answering application built with LangChain, su
 - **Python** — Core programming language
 - **LangChain** — LLM application framework
 - **Pydantic** — Structured data validation
+- **Rich** — Terminal UI with panels, tables, spinners & syntax highlighting
 - **LangSmith** — LLM tracing and observability
 
 ## Installation
@@ -98,29 +102,30 @@ Launch the interactive assistant by running with no arguments:
 uv run main.py
 ```
 
-When the session starts, an interactive banner displays your active configuration and command cheat-sheet:
+When the session starts, a Rich-styled banner displays your active configuration and a quick-reference command grid:
 
 ```text
-============================================================================
-  INQUIRA - AI-Powered Structured Q&A Assistant
-============================================================================
-  Active Provider : openai
-  Active Model    : gpt-4o-mini
-  Temperature     : 0.3
-  Output Format   : Human-readable structured text
-  Observability   : LangSmith Active (Inquira)
-----------------------------------------------------------------------------
-  HOW TO INTERACT & SWITCH CONFIGURATION:
-  • Ask Question   : Type your question directly and press Enter.
-  • Change Provider: /provider <openai|anthropic>  (e.g., /provider anthropic)
-  • Change Model   : /model <model_name>          (e.g., /model gpt-4o)
-  • Change Temp    : /temp <0.0-1.0>              (e.g., /temp 0.7)
-  • Toggle JSON    : /json                        (switch Text <-> JSON output)
-  • Check Settings : /info                        (view active config)
-  • Full Manual    : /help                        (view detailed guide)
-  • Exit Session   : exit, quit, or Ctrl+C
-============================================================================
+╭──────────────────────────────────────────────────────────────────╮
+│                                                                  │
+│              ✦  I N Q U I R A  ✦                                 │
+│         AI-Powered Structured Q&A Assistant                      │
+│                                                                  │
+│  ┌─────────────────────────────────────────────────────────┐     │
+│  │  Provider    │ openai                                    │     │
+│  │  Model       │ gpt-4o-mini                               │     │
+│  │  Temperature │ 0.3                                       │     │
+│  │  Output      │ Structured Text                           │     │
+│  │  LangSmith   │ ✓ Active (Inquira)                        │     │
+│  └─────────────────────────────────────────────────────────┘     │
+│                                                                  │
+│  Quick Commands:                                                 │
+│   /provider <name>  /model <name>  /temp <float>                 │
+│   /json  /info  /help  /clear  exit                              │
+│                                                                  │
+╰──────────────────────────────────────────────────────────────────╯
 ```
+
+Responses are rendered as styled panels with colored confidence badges and follow-up question indicators.
 
 #### In-Session Slash Commands:
 | Command | Description | Example |
