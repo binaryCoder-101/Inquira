@@ -76,51 +76,72 @@ Create a `.env` file in the project root and add your API credentials:
 OPENAI_API_KEY=your_openai_api_key
 ANTHROPIC_API_KEY=your_anthropic_api_key
 LANGSMITH_API_KEY=your_langsmith_api_key
+
+# Optional defaults:
+LLM_PROVIDER=openai
+OPENAI_MODEL=gpt-4o-mini
+ANTHROPIC_MODEL=claude-3-5-sonnet-20241022
+LLM_TEMPERATURE=0.3
 ```
 
 > **Security:** Never commit your `.env` file or expose your API keys publicly. Ensure `.env` is included in `.gitignore`.
 
 ## Usage
 
-Inquira provides a simple question-answering interface powered by OpenAI and Anthropic language models.
+Inquira provides flexible interaction modes: an interactive CLI terminal session, single command-line queries, batch processing, and provider/model switching.
 
-### 1. Run the Application
+### 1. Interactive Mode
 
-Execute the main Python script:
+Run without arguments to start an interactive Q&A session:
 
 ```bash
 uv run main.py
 ```
 
-> Replace `main.py` with the actual entry point if different.
+### 2. Single Question
 
-### 2. Ask a Question
+Ask a question directly from the command line:
 
-Submit a natural language question to the application.
-
-**Example input:**
-
-```text
-What is retrieval-augmented generation?
+```bash
+uv run main.py "What is retrieval-augmented generation?"
 ```
 
-**Example output:**
+Or specify `--json` for machine-readable JSON output:
 
-```json
-{
-  "answer": "Retrieval-augmented generation (RAG) is a technique that enhances language model responses by incorporating information retrieved from external knowledge sources.",
-  "confidence": 0.95,
-  "sources": []
-}
+```bash
+uv run main.py --json "What is retrieval-augmented generation?"
 ```
 
-The application generates a structured response containing:
+### 3. Multi-Provider & Model Selection
 
-- **answer** — The LLM-generated response to the question.
-- **confidence** — A model-generated confidence score.
-- **sources** — Source references, if available.
+Switch between OpenAI and Anthropic providers and select custom models:
 
-### 3. Monitor with LangSmith
+```bash
+# Query OpenAI with a specific model
+uv run main.py -p openai -m gpt-4o "Explain quantum computing."
+
+# Query Anthropic Claude
+uv run main.py -p anthropic -m claude-3-5-sonnet-20241022 "What is LangChain?"
+```
+
+### 4. Batch Processing
+
+Process multiple questions in parallel:
+
+```bash
+uv run main.py -b "What is Python?" "What is JavaScript?" "What is Rust?"
+```
+
+### 5. Run Demos
+
+Run built-in test demos (`qa`, `batch`, `error`, or `all`):
+
+```bash
+uv run main.py --demo
+uv run main.py --demo error
+```
+
+### 6. Monitor with LangSmith
 
 When LangSmith tracing is enabled, you can inspect LLM interactions, execution traces, and debugging information through the LangSmith dashboard.
 
