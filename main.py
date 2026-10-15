@@ -10,9 +10,9 @@ load_dotenv()
 
 # LangSmith Configuration
 if os.getenv("LANGSMITH_API_KEY"):
-    os.environ["LANGSMITH_API_KEY"] = "true"
-    os.environ.setdefault("LANGSMITH_PROJECT_NAME", "Inquira")
-    print("LangSmith is configured. - Project: {os.getenv('LANGSMITH_PROJECT_NAME')}")
+    os.environ["LANGSMITH_TRACING"] = "true"
+    os.environ.setdefault("LANGSMITH_PROJECT", "Inquira")
+    print(f"LangSmith is configured. - Project: {os.getenv('LANGSMITH_PROJECT')}")
 else:
     print("LangSmith is not configured.")
 
@@ -20,7 +20,7 @@ else:
 # Pydantic Schema
 class QAResponse(BaseModel):
     answer: str = Field(description="Answer to the question")
-    confidence: float = Field(description="Confidence level: high, medium, low")
+    confidence: str = Field(description="Confidence level: high, medium, low")
     reasoning: str = Field(description="Reasoning behind the answer")
     follow_up_questions: List[str] = Field(
         description="A list of follow-up questions related to the topic", 
@@ -95,8 +95,44 @@ class SmartQABot:
                 sources_needed=False
             ) for _ in questions]
 
+def demo_qa_bot():
+    bot = SmartQABot()
+    print("=== Q&A Bot Demo ===\n")
+    
+    # Example 1: Single question
+    print("Question 1: What is retrieval-augmented generation?")
+    response = bot.ask("What is retrieval-augmented generation?")
+    print(f"Answer: {response.answer}")
+    print(f"Confidence: {response.confidence}")
+    print(f"Reasoning: {response.reasoning}")
+    print(f"Follow-up questions: {response.follow_up_questions}")
+    print(f"Sources needed: {response.sources_needed}")
+    print("\n" + "="*40 + "\n")
+    
+    # Example 2: Batch questions
+    print("Question 2: What is LangChain?")
+    print("Question 3: How does LangSmith help with observability?")
+    
+    questions = [
+        "What is LangChain?",
+        "How does LangSmith help with observability?",
+    ]
+    
+    responses = bot.ask_batch(questions)
+    
+    for i, response in enumerate(responses, start=2):
+        print(f"\nQuestion {i}: {questions[i-2]}")
+        print(f"Answer: {response.answer}")
+        print(f"Confidence: {response.confidence}")
+        print(f"Reasoning: {response.reasoning}")
+        print(f"Follow-up questions: {response.follow_up_questions}")
+        print(f"Sources needed: {response.sources_needed}")
+
 def main():
-    print("Hello from inquira!")
+    try:
+        demo_qa_bot()
+    finally:
+        Client().flush()
 
 
 if __name__ == "__main__":
