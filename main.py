@@ -128,9 +128,52 @@ def demo_qa_bot():
         print(f"Follow-up questions: {response.follow_up_questions}")
         print(f"Sources needed: {response.sources_needed}")
 
+@traceable(name="error_handling_demo", run_type="chain")
+def demo_error_handling():
+    """Demonstrate error handling."""
+
+    bot = SmartQABot()
+
+    print("\n" + "=" * 60)
+    print("ERROR HANDLING DEMO")
+    print("=" * 60)
+
+    # Test with a very long question (edge case)
+    long_question = "What is " + "very " * 100 + "important?"
+
+    response = bot.ask(long_question)
+    print(f"Handled gracefully: {response.confidence}")
+
+
+@traceable(name="batch_demo", run_type="chain")
+def demo_batch_processing():
+    """Demonstrate batch processing."""
+
+    bot = SmartQABot()
+
+    questions = [
+        "What is Python?",
+        "What is JavaScript?",
+        "What is Rust?",
+    ]
+
+    print("\n" + "=" * 60)
+    print("BATCH PROCESSING DEMO")
+    print("=" * 60)
+
+    responses = bot.ask_batch(questions)
+
+    for q, r in zip(questions, responses):
+        print(f"\n{q}")
+        print(f"  -> {r.answer[:100]}...")
+        print(f"  Confidence: {r.confidence}")
+    
+
 def main():
     try:
         demo_qa_bot()
+        demo_batch_processing()
+        demo_error_handling()
     finally:
         Client().flush()
 
