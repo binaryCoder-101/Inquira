@@ -102,37 +102,70 @@ Launch the interactive assistant by running with no arguments:
 uv run main.py
 ```
 
-When the session starts, a Rich-styled banner displays your active configuration and a quick-reference command grid:
+When the session starts, an ultra-modern banner displays with ASCII art branding, active session telemetry, and quick-start command references:
 
 ```text
-╭──────────────────────────────────────────────────────────────────╮
-│                                                                  │
-│              ✦  I N Q U I R A  ✦                                 │
-│         AI-Powered Structured Q&A Assistant                      │
-│                                                                  │
-│  ┌─────────────────────────────────────────────────────────┐     │
-│  │  Provider    │ openai                                    │     │
-│  │  Model       │ gpt-4o-mini                               │     │
-│  │  Temperature │ 0.3                                       │     │
-│  │  Output      │ Structured Text                           │     │
-│  │  LangSmith   │ ✓ Active (Inquira)                        │     │
-│  └─────────────────────────────────────────────────────────┘     │
-│                                                                  │
-│  Quick Commands:                                                 │
-│   /provider <name>  /model <name>  /temp <float>                 │
-│   /json  /info  /help  /clear  exit                              │
-│                                                                  │
-╰──────────────────────────────────────────────────────────────────╯
+  ❯ inquira
+
+  ██╗    ██╗ ███╗   ██╗  ██████╗  ██╗   ██╗ ██╗ ██████╗   █████╗ 
+  ╚██╗   ██║ ████╗  ██║ ██╔═══██╗ ██║   ██║ ██║ ██╔══██╗ ██╔══██╗
+   ╚██╗  ██║ ██╔██╗ ██║ ██║   ██║ ██║   ██║ ██║ ██████╔╝ ███████║
+   ██╔╝  ██║ ██║╚██╗██║ ██║▄▄ ██║ ██║   ██║ ██║ ██╔══██╗ ██╔══██║
+  ██╔╝   ██║ ██║ ╚████║ ╚██████╔╝ ╚██████╔╝ ██║ ██║  ██║ ██║  ██║
+  ╚═╝    ╚═╝ ╚═╝  ╚═══╝  ╚══▀▀═╝   ╚═════╝  ╚═╝ ╚═╝  ╚═╝ ╚═╝  ╚═╝
+
+  AI-Powered Structured Q&A Assistant  ·  Good afternoon
+
+  ⚡ provider openai  ·  model gpt-4o-mini  ·  temp 0.3  ·  output text  ·  langsmith ● active
+
+  Type a question or press Enter for actions menu  ·  Tab autocomplete  ·  ↑↓ browse history
+
+  Available commands:
+    /menu             —  interactive arrow-key command & setting picker
+    /provider <name>  —  switch LLM provider (openai / anthropic)
+    /model <name>     —  switch active model (gpt-4o-mini, claude-3-5, etc.)
+    /temp <float>     —  set temperature (0.0 deterministic – 1.0 creative)
+    /json             —  toggle structured JSON response mode
+    /info             —  display active session configuration
+    /help             —  open comprehensive user guide & options
+    /clear            —  clear terminal screen
+    exit              —  quit Inquira session
 ```
 
 Responses are rendered as styled panels with colored confidence badges and follow-up question indicators.
 
+#### Interactive Arrow-Key Menu (Pic 4 Style):
+Press **Enter** on an empty line or type `/menu` (or run `/provider`, `/model`, or `/temp` without arguments) to open an interactive choice widget navigable with arrow keys (`↑`/`↓` or `k`/`j`), number keys (`1`-`8`), and `Enter`:
+
+```text
+  $ /menu
+
+  Quick Actions
+
+    1. 💬 Ask a question      —  type question directly
+  ❯ 2. 🔄 Switch provider     —  OpenAI ↔ Anthropic
+    3. 🤖 Switch model        —  gpt-4o-mini, claude-3-5, etc.
+    4. 🌡️ Set temperature     —  0.0 deterministic – 1.0 creative
+    5. 📋 Toggle JSON output  —  switch text ↔ structured JSON
+    6. ℹ️  Session config     —  view active provider & model
+    7. 📖 User manual         —  full command reference & help
+    8. 🚪 Exit session        —  quit Inquira
+
+  ↑↓ / jk select  ·  enter / 1-9 to pick  ·  esc back
+
+╭───────────────────────────────────────────╮
+│ ❯ ↑↓ select  ·  enter open  ·  esc cancel │
+╰───────────────────────────────────────────╯
+  ~/inquira · provider: openai · model: gpt-4o-mini · status: nominal
+```
+
 #### In-Session Slash Commands:
 | Command | Description | Example |
 |---|---|---|
-| `/provider <name>` | Switch between OpenAI and Anthropic | `/provider anthropic` |
-| `/model <name>` | Switch active model dynamically | `/model claude-3-5-sonnet-20241022` |
-| `/temp <float>` | Adjust sampling temperature (0.0 to 1.0) | `/temp 0.7` |
+| `/menu` | Open interactive arrow-key choice menu | `/menu` |
+| `/provider [name]` | Switch between OpenAI and Anthropic (or opens picker) | `/provider anthropic` or `/provider` |
+| `/model [name]` | Switch active model dynamically (or opens picker) | `/model gpt-4o` or `/model` |
+| `/temp [float]` | Adjust sampling temperature (or opens picker) | `/temp 0.7` or `/temp` |
 | `/json` | Toggle between formatted text and raw JSON output | `/json` |
 | `/info` | Display active provider, model, temperature, and tracing | `/info` |
 | `/clear` | Clear the terminal screen | `/clear` |
