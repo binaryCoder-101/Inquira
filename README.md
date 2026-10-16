@@ -102,62 +102,17 @@ Launch the interactive assistant by running with no arguments:
 uv run main.py
 ```
 
-When the session starts, an ultra-modern banner displays with ASCII art branding, active session telemetry, and quick-start command references:
+When the session starts, Inquira displays your active session configuration, connection status, and available commands:
 
-```text
-  ❯ inquira
-
-  ██╗    ██╗ ███╗   ██╗  ██████╗  ██╗   ██╗ ██╗ ██████╗   █████╗ 
-  ╚██╗   ██║ ████╗  ██║ ██╔═══██╗ ██║   ██║ ██║ ██╔══██╗ ██╔══██╗
-   ╚██╗  ██║ ██╔██╗ ██║ ██║   ██║ ██║   ██║ ██║ ██████╔╝ ███████║
-   ██╔╝  ██║ ██║╚██╗██║ ██║▄▄ ██║ ██║   ██║ ██║ ██╔══██╗ ██╔══██║
-  ██╔╝   ██║ ██║ ╚████║ ╚██████╔╝ ╚██████╔╝ ██║ ██║  ██║ ██║  ██║
-  ╚═╝    ╚═╝ ╚═╝  ╚═══╝  ╚══▀▀═╝   ╚═════╝  ╚═╝ ╚═╝  ╚═╝ ╚═╝  ╚═╝
-
-  AI-Powered Structured Q&A Assistant  ·  Good afternoon
-
-  ⚡ provider openai  ·  model gpt-4o-mini  ·  temp 0.3  ·  output text  ·  langsmith ● active
-
-  Type a question or press Enter for actions menu  ·  Tab autocomplete  ·  ↑↓ browse history
-
-  Available commands:
-    /menu             —  interactive arrow-key command & setting picker
-    /provider <name>  —  switch LLM provider (openai / anthropic)
-    /model <name>     —  switch active model (gpt-4o-mini, claude-3-5, etc.)
-    /temp <float>     —  set temperature (0.0 deterministic – 1.0 creative)
-    /json             —  toggle structured JSON response mode
-    /info             —  display active session configuration
-    /help             —  open comprehensive user guide & options
-    /clear            —  clear terminal screen
-    exit              —  quit Inquira session
-```
+![Inquira Interactive Session](assets/inquira-banner.png)
 
 Responses are rendered as styled panels with colored confidence badges and follow-up question indicators.
 
-#### Interactive Arrow-Key Menu (Pic 4 Style):
-Press **Enter** on an empty line or type `/menu` (or run `/provider`, `/model`, or `/temp` without arguments) to open an interactive choice widget navigable with arrow keys (`↑`/`↓` or `k`/`j`), number keys (`1`-`8`), and `Enter`:
+#### Interactive Action Menu
 
-```text
-  $ /menu
+Press **Enter** on an empty line or type `/menu` (or run `/provider`, `/model`, or `/temp` without arguments) to open an interactive menu navigable with arrow keys (`↑`/`↓` or `j`/`k`), number keys (`1`-`8`), and `Enter`:
 
-  Quick Actions
-
-    1. 💬 Ask a question      —  type question directly
-  ❯ 2. 🔄 Switch provider     —  OpenAI ↔ Anthropic
-    3. 🤖 Switch model        —  gpt-4o-mini, claude-3-5, etc.
-    4. 🌡️ Set temperature     —  0.0 deterministic – 1.0 creative
-    5. 📋 Toggle JSON output  —  switch text ↔ structured JSON
-    6. ℹ️  Session config     —  view active provider & model
-    7. 📖 User manual         —  full command reference & help
-    8. 🚪 Exit session        —  quit Inquira
-
-  ↑↓ / jk select  ·  enter / 1-9 to pick  ·  esc back
-
-╭───────────────────────────────────────────╮
-│ ❯ ↑↓ select  ·  enter open  ·  esc cancel │
-╰───────────────────────────────────────────╯
-  ~/inquira · provider: openai · model: gpt-4o-mini · status: nominal
-```
+![Inquira Interactive Menu](assets/inquira-menu.png)
 
 #### In-Session Slash Commands:
 | Command | Description | Example |
