@@ -4,6 +4,10 @@
 
 Inquira is an AI-powered question-answering application built with LangChain, supporting multiple LLM providers through OpenAI and Anthropic APIs.
 
+## Demo
+
+[![Inquira Demo](https://img.youtube.com/vi/Nw1y7b9PL40/maxresdefault.jpg)](https://youtu.be/Nw1y7b9PL40)
+
 ## Features
 
 - **Rich Terminal UI** — Stunning TUI with styled panels, colored
